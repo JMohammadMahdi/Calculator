@@ -21,8 +21,9 @@ function ButtonHandeler(key) {
 
     if (CalculateClick) {
         displayValue = "0";
-        CalculateClick = false;
         dataSaver.innerText = null;
+
+        CalculateClick = false;
     }
 
     (displayValue > 0 || displayValue == ".") ? display.innerText += String(digits) : display.innerText = String(digits);
@@ -40,13 +41,15 @@ function OperratorHandeler(opt) {
     const displayValue = display.innerText.replace("=", "");
     let MathString = "";
 
-    if (display.innerText > 0) {
-        MathString += opt;
-        dataSaver.innerText += display.innerText + MathString;
-        display.innerText = 0;
-    } else if (CalculateClick) {
+    if (CalculateClick) {
         dataSaver.innerText = displayValue + opt;
         display.innerText = "0"
+
+        CalculateClick = false;
+    } else if (display.innerText > 0) {
+        MathString += opt;
+        dataSaver.innerText += displayValue + MathString;
+        display.innerText = 0;
 
         CalculateClick = false;
     }
@@ -71,8 +74,8 @@ const power = document.getElementById("powerTwo").
 
 function PowerHandeler() {
     const displayValue = display.innerText.replace("=", "");
-    display.innerText = displayValue * displayValue;
-    dataSaver.innerText = displayValue + "^" + displayValue;
+    display.innerText = "=" + displayValue * displayValue;
+    dataSaver.innerText = displayValue + "^" + 2;
 
     CalculateClick = true;
 }
