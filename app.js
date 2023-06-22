@@ -2,11 +2,11 @@ const keysElements = document.querySelectorAll(".keys")
 const operatorsElements = document.querySelectorAll(".operator")
 const dataSaver = document.querySelector(".dataSaver")
 
-const KeyPad = document.addEventListener("keydown", keyHandler)
+document.addEventListener("keydown", keyHandler)
+
 const display = document.querySelector(".result")
 
 let CalculateClick = false;
-
 keysElements.forEach(element => {
     element.addEventListener("click", GetInnerKey)
 });
@@ -37,6 +37,7 @@ function GetInnerOpt(event) {
 }
 
 function OperratorHandeler(opt) {
+    const displayValue = display.innerText.replace("=", "");
     let MathString = "";
 
     if (display.innerText > 0) {
@@ -44,8 +45,6 @@ function OperratorHandeler(opt) {
         dataSaver.innerText += display.innerText + MathString;
         display.innerText = 0;
     } else if (CalculateClick) {
-        const displayValue = display.innerText.substring(1);
-
         dataSaver.innerText = displayValue + opt;
         display.innerText = "0"
 
@@ -53,9 +52,34 @@ function OperratorHandeler(opt) {
     }
 }
 
+const RadicalKey = document.getElementById("sqrt").
+    addEventListener("click", RadicalHandeler);
+
+function RadicalHandeler() {
+    const displayValue = display.innerText.replace("=", "");
+    const dataSaverValue = dataSaver.innerText;
+
+    const result = Math.sqrt(displayValue);
+    display.innerText = `=${result}`;
+    dataSaver.innerText = ("√" + displayValue);
+
+    CalculateClick = true;
+}
+
+const power = document.getElementById("powerTwo").
+    addEventListener("click", PowerHandeler);
+
+function PowerHandeler() {
+    const displayValue = display.innerText.replace("=", "");
+    display.innerText = displayValue * displayValue;
+    dataSaver.innerText = displayValue + "^" + displayValue;
+
+    CalculateClick = true;
+}
+
 document.querySelector("#clear").addEventListener("click", CleanAll)
 function CleanAll() {
-    display.innerText = 0;
+    display.innerText = "0";
     dataSaver.innerText = null;
 }
 
@@ -105,25 +129,18 @@ function keyHandler(event) {
     const key = event.key;
 
     if (10 > key && key >= 0 || key == ".") {
-
         ButtonHandeler(key);
-
     } else if (key == "*" || key == "+" || key == "/" || key == "-") {
-
         OperratorHandeler(key)
-
     } else if (key == "Enter") {
-
         Calcutalting();
-
     } else if (key == "Backspace") {
-
         RemoveDigits();
-
     } else if (key == "Escape") {
-
         CleanAll();
-
+    } else if (event.shiftKey && event.keyCode === 54) {
+        event.preventDefault();
+        PowerHandeler();
     }
 }
 
