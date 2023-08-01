@@ -1,0 +1,21 @@
+@media (max-width: 680px) {
+    body {
+        overflow-x: hidden;
+    }
+    .shipe {
+        display: none;
+    }
+    .calculator {
+        height: max-content;
+        align-items: flex-start;
+        margin: 75px 0 20px;
+    }
+    .navbar {
+        font-size: clamp(.8rem, 2.5vw, 1rem);
+        text-align: center;
+        display: block;
+    }
+    .num-pad {
+        height: 120px;
+    }
+}

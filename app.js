@@ -12,10 +12,10 @@ keysElements.forEach(element => {
 });
 
 function GetInnerKey(event) {
-    ButtonHandeler(event.target.innerText)
+    ButtonHandler(event.target.innerText)
 }
 
-function ButtonHandeler(key) {
+function ButtonHandler(key) {
     const digits = key;
     let displayValue = display.innerText;
 
@@ -34,10 +34,10 @@ operatorsElements.forEach(operator => {
 });
 
 function GetInnerOpt(event) {
-    OperratorHandeler(event.target.innerText)
+    OperatorHandler(event.target.innerText)
 }
 
-function OperratorHandeler(opt) {
+function OperatorHandler(opt) {
     const displayValue = display.innerText.replace("=", "");
     let MathString = "";
 
@@ -56,9 +56,9 @@ function OperratorHandeler(opt) {
 }
 
 const RadicalKey = document.getElementById("sqrt").
-    addEventListener("click", RadicalHandeler);
+    addEventListener("click", RadicalHandler);
 
-function RadicalHandeler() {
+function RadicalHandler() {
     const displayValue = display.innerText.replace("=", "");
     const dataSaverValue = dataSaver.innerText;
 
@@ -70,9 +70,9 @@ function RadicalHandeler() {
 }
 
 const power = document.getElementById("powerTwo").
-    addEventListener("click", PowerHandeler);
+    addEventListener("click", PowerHandler);
 
-function PowerHandeler() {
+function PowerHandler() {
     const displayValue = display.innerText.replace("=", "");
     display.innerText = "=" + displayValue * displayValue;
     dataSaver.innerText = displayValue + "^" + 2;
@@ -103,8 +103,8 @@ function RemoveDigits() {
     }
 }
 
-document.querySelector(".submit").addEventListener("click", Calcutalting);
-function Calcutalting() {
+document.querySelector(".submit").addEventListener("click", Calculating);
+function Calculating() {
     let dataSaverValue = "";
     let str = null;
 
@@ -132,18 +132,18 @@ function keyHandler(event) {
     const key = event.key;
 
     if (10 > key && key >= 0 || key == ".") {
-        ButtonHandeler(key);
+        ButtonHandler(key);
     } else if (key == "*" || key == "+" || key == "/" || key == "-") {
-        OperratorHandeler(key)
+        OperatorHandler(key)
     } else if (key == "Enter") {
-        Calcutalting();
+        Calculating();
     } else if (key == "Backspace") {
         RemoveDigits();
     } else if (key == "Escape") {
         CleanAll();
     } else if (event.shiftKey && event.keyCode === 54) {
         event.preventDefault();
-        PowerHandeler();
+        PowerHandler();
     }
 }
 
